@@ -3,9 +3,9 @@ import { withRouter } from "react-router-dom";
 
 
 import Spinner from '../../../components/UI/Spinner/Spinner'
-import axios from '../../../axios-orders'
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
+import axios from '../../../axios-orders'
 
 class ContactData extends Component {
   state = {
@@ -17,13 +17,12 @@ class ContactData extends Component {
     },
     loading: false
   }
-
   orderHandler = (event) => {
     event.preventDefault();
     this.setState({ loading: true })
     const order = {
       ingredients: this.props.ingredients,
-      price: this.state.totalPrice,
+      price: this.props.price,
       customer: {
         name: "Salim Akram",
         address: {
@@ -39,11 +38,11 @@ class ContactData extends Component {
     }
     axios.post('/orders.json', order)
       .then(response => {
-        this.setState({ loading: false, purchasing: false });
+        this.setState({ loading: false });
         this.props.history.push('/');
       })
       .catch(error => {
-        this.setState({ loading: false, purchasing: false });
+        this.setState({ loading: false });
       });
   }
 
