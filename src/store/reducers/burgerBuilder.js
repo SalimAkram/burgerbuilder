@@ -4,7 +4,8 @@ import { addIng, errIng, remIng, setIng } from '../burgerUtility'
 const initialState = {
   ingredients: null, 
   totalPrice: 4,
-  error: false
+  error: false,
+  building: false
 };
 
 const reducer = (state = initialState, action) => {
