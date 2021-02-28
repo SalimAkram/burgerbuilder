@@ -1,4 +1,4 @@
-import { updateObject } from './utility'
+import { updateObject } from '../../shared/utility'
 
 export const purInit = (state, action) => {
  return updateObject(state, { purchased: false });
