@@ -48,9 +48,9 @@ export const authorization = (email, password, isSignUp) => {
       password: password,
       returnSecureToken: true
     };
-    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FAK}`
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=`
     if (!isSignUp) {
-      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FAK}`
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=`
     }
     axios.post(url, authorizationData)
       .then(response => {
