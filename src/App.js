@@ -22,9 +22,9 @@ const asyncAuthorization = asyncComponent(() => {
 
 class App extends Component {
 
-componentDidMount () {
-  this.props.onAutoLogIn();
-};
+  componentDidMount () {
+    this.props.onAutoLogIn();
+  };
 
   render () {
     let routes = (
