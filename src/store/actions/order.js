@@ -1,5 +1,5 @@
-import * as actionTypes from './actionTypes'
-import axios from '../../axios-orders'
+import * as actionTypes from './actionTypes';
+import axios from '../../axios-orders';
 
 export const purchaseSuccess = (orderId, orderData) => {
   return {
@@ -22,13 +22,12 @@ export const purchaseStart = () => {
   };
 };
 
-export const purchase = (orderData) => {
+export const purchase = (orderData, token) => {
   return dispatch => {
      dispatch(purchaseStart());
-    axios.post('/orders.json', orderData)
+    axios.post('/orders.json?auth=' + token, orderData)
       .then(response => {
-        dispatch(purchaseSuccess(response.data.name, orderData))
-        console.log(response.data);
+        dispatch(purchaseSuccess(response.data.name, orderData));
       })
       .catch(error => {
        dispatch(purchaseFailed(error))
@@ -62,23 +61,23 @@ export const fetchOrdersStart = () => {
   };
 };
 
-export const fetchOrders = () => {
+export const fetchOrders = (token, userId) => {
   return dispatch => {
     dispatch(fetchOrdersStart());
-   axios.get('/orders.json')
-      .then(response => {
-        console.log(response.data)
-        const fetchedOrders = [];
-        for (let key in response.data) {
-          fetchedOrders.push({
-            ...response.data[key], 
-            id: key
-          });
-        }
-        dispatch(fetchOrdersSucces(fetchedOrders));
-      })
-      .catch(error => {
-        dispatch(fetchOrdersFailed(error));
-      });
+    const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+    axios.get('/orders.json' + queryParams)
+        .then(response => {
+          const fetchedOrders = [];
+          for (let key in response.data) {
+            fetchedOrders.push({
+              ...response.data[key], 
+              id: key
+            });
+          }
+          dispatch(fetchOrdersSucces(fetchedOrders));
+        })
+        .catch(error => {
+          dispatch(fetchOrdersFailed(error));
+        });
   };
 };

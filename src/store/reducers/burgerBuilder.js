@@ -1,10 +1,11 @@
 import * as actionTypes from '../actions/actionTypes';
-import { addIng, errIng, remIng, setIng } from '../burgerUtility'
+import { addIng, errIng, remIng, setIng } from '../utility/burgerUtility'
 
 const initialState = {
   ingredients: null, 
   totalPrice: 4,
-  error: false
+  error: false,
+  building: false
 };
 
 const reducer = (state = initialState, action) => {

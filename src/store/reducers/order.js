@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../utility';
-import { purInit, purStart, purFailed, fetchOStart, fetchOFailed } from '../orderUtility';
+import { updateObject } from '../../shared/utility';
+import { purInit, purStart, purFailed, fetchOStart, fetchOFailed } from '../utility/orderUtility';
 
 const initialState = {
   orders: [],
